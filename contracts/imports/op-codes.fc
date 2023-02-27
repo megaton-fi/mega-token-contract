@@ -1,0 +1,18 @@
+;; operations (constant values taken from crc32 on op message in the companion .tlb files and appear during build)
+
+;; common
+const op::change_next_admin = 0x62dd86f1;
+const op::change_admin = 0x66447dad;
+
+;; Jetton Minter
+const op::mint = 21;
+const op::change_minter_address = 0x11db408a;
+const op::change_content = 0x743f8e58;
+
+;; Jetton Wallet
+const op::transfer = 0xf8a7ea5;
+const op::transfer_notification = 0x7362d09c;
+const op::excesses = 0xd53276db;
+const op::burn = 0x595f07bc;
+const op::internal_transfer = 0x178d4519;
+const op::burn_notification = 0x7bdd97de;

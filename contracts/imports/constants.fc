@@ -1,0 +1,13 @@
+;; common
+const const::min_tons_for_storage = 10000000; ;; 0.01 TON
+const const::gas_consumption = 10000000; ;; 0.01 TON
+
+;; jetton
+const const::mint_gas_consumption = 100000000; ;; 0.1 TON
+const const::jetton_transfer_gas_consumption = 40000000; ;; 0.04 TON
+
+;; jetton discoverable
+const const::provide_address_gas_consumption = 10000000; ;; 0.01 TON
+
+;; etc constants
+const const::work_chain = 0x00; ;; normally 0, only special contracts should be deployed to masterchain (-1)

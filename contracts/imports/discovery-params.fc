@@ -1,0 +1,12 @@
+;; moved to the separate file to keep hex of the previous codes unchanged
+
+#include "constants.fc";
+
+const op::provide_wallet_address = 0x2c76b973;
+const op::take_wallet_address = 0xd1735400;
+
+int is_resolvable?(slice addr) inline {
+    (int wc, _) = parse_std_addr(addr);
+
+    return wc == const::work_chain;
+}

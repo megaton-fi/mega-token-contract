@@ -1,0 +1,19 @@
+// base types defined in https://github.com/newton-blockchain/ton/blob/master/crypto/block/block.tlb
+
+// storage (according to save_data() contract method)
+
+storage#_ balance:(VarUInteger 16) owner_address:MsgAddress jetton_master_address:MsgAddress jetton_wallet_code:^Cell = Storage
+
+// ops
+
+transfer query_id:uint64 amount:VarUInteger 16 destination:MsgAddress response_destination:MsgAddress custom_payload:Maybe ^Cell forward_ton_amount:VarUInteger 16 forward_payload:Either Cell ^Cell = InternalMsgBody
+
+transfer_notification query_id:uint64 amount:VarUInteger 16 sender:MsgAddress forward_payload:Either Cell ^Cell = InternalMsgBody
+
+excesses query_id:uint64 = InternalMsgBody
+
+burn query_id:uint64 amount:VarUInteger 16 response_destination:MsgAddress custom_payload:Maybe ^Cell = InternalMsgBody
+
+internal_transfer query_id:uint64 amount:VarUInteger 16 from:MsgAddress response_address:MsgAddress forward_ton_amount:VarUInteger 16 forward_payload:Either Cell ^Cell = InternalMsgBody
+
+burn_notification#0x7bdd97de query_id:uint64 amount:VarUInteger 16 sender:MsgAddress response_destination:MsgAddress custom_payload:Maybe ^Cell = InternalMsgBody

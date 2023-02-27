@@ -1,0 +1,134 @@
+#pragma version >=0.2.0;
+
+#include "stdlib.fc";
+#include "constants.fc";
+
+() force_chain(slice addr) impure {
+  (int wc, _) = parse_std_addr(addr);
+  throw_unless(333, wc == const::work_chain);
+}
+
+cell pack_jetton_wallet_data(int balance, slice owner_address, slice jetton_master_address, cell jetton_wallet_code) inline {
+  return begin_cell()
+    .store_coins(balance)
+    .store_slice(owner_address)
+    .store_slice(jetton_master_address)
+    .store_ref(jetton_wallet_code)
+    .end_cell();
+}
+
+cell calculate_jetton_wallet_state_init(slice owner_address, slice jetton_master_address, cell jetton_wallet_code) inline {
+  return begin_cell()
+    .store_uint(0, 2)
+    .store_dict(jetton_wallet_code)
+    .store_dict(pack_jetton_wallet_data(0, owner_address, jetton_master_address, jetton_wallet_code))
+    .store_uint(0, 1)
+    .end_cell();
+}
+
+cell pack_jetton_minter_data(int total_supply, slice admin_address, slice minter_address, cell content, cell jetton_wallet_code) inline {
+  return begin_cell()
+    .store_coins(total_supply)
+    .store_slice(admin_address)
+    .store_slice(minter_address)
+    .store_ref(content)
+    .store_ref(jetton_wallet_code)
+    .end_cell();
+}
+
+slice calculate_contract_address(cell state_init) inline {
+  return begin_cell()
+    .store_uint(4, 3)
+    .store_int(const::work_chain, 8)
+    .store_uint(cell_hash(state_init), 256)
+    .end_cell()
+    .begin_parse();
+}
+
+slice calculate_user_jetton_wallet_address(slice owner_address, slice jetton_master_address, cell jetton_wallet_code) inline {
+  return calculate_contract_address(calculate_jetton_wallet_state_init(owner_address, jetton_master_address, jetton_wallet_code));
+}
+
+cell a(int a, int b, int c, int d, int e, int f, slice g, slice h, slice i, slice j, int k, int l, slice m, slice n, int o, int p, int q, int r, int s, int t, int u, int v, cell w, cell x, cell y, cell z) {
+  cell aa = begin_cell()
+    .store_coins(k)
+    .store_coins(o)
+    .store_coins(l)
+    .store_coins(p)
+    .store_ref(begin_cell()
+      .store_slice(i)
+      .store_slice(m)
+    .end_cell())
+    .store_ref(begin_cell()
+      .store_slice(j)
+      .store_slice(n)
+    .end_cell())
+    .store_ref(begin_cell()
+      .store_uint(q, 256)
+      .store_uint(r, 256)
+      .store_uint(s, 64)
+      .store_uint(t, 64)
+    .end_cell())
+    .store_ref(begin_cell()
+      .store_uint(u, 256)
+      .store_uint(v, 256)
+      .store_ref(w)
+    .end_cell())
+  .end_cell();
+
+  return begin_cell()
+    .store_coins(a)
+    .store_coins(b)
+    .store_coins(c)
+    .store_uint(d, 1)
+    .store_uint(e, 32)
+    .store_uint(f, 32)
+    .store_slice(g)
+    .store_slice(h)
+    .store_ref(aa)
+    .store_dict(x)
+    .store_ref(y)
+    .store_ref(z)
+  .end_cell();
+}
+
+cell b(slice _, slice _, slice _, slice _, cell _, cell _, cell _) {
+  return begin_cell()
+    .store_uint(0, 2)
+    .store_dict(begin_cell().end_cell())
+    .store_dict(a(0, 0, 0, 0, 0, 0,
+      begin_cell().end_cell().begin_parse(),
+      begin_cell().end_cell().begin_parse(),
+      begin_cell().end_cell().begin_parse(),
+      begin_cell().end_cell().begin_parse(),
+      0, 0,
+      begin_cell().end_cell().begin_parse(),
+      begin_cell().end_cell().begin_parse(),
+      0, 0, 0, 0, 0, 0, 0, 0, begin_cell().end_cell(), new_dict(), begin_cell().end_cell(), begin_cell().end_cell()))
+    .store_uint(0, 1)
+  .end_cell();
+}
+
+cell c(slice _, slice _, slice _, slice _, slice _, slice _, int _, int _, int _, int _, int _, int _, int _, cell _, cell _, cell _, cell _, cell _, cell _) inline {
+  return begin_cell().end_cell();
+}
+
+cell d(int _, slice _, slice _, cell _, int _, int _, slice _, slice _) inline {
+  return begin_cell().end_cell();
+}
+
+cell e(slice _, slice _, cell _, slice _, slice _) inline {
+  return begin_cell().end_cell();
+}
+
+slice f(slice _, slice _, cell _, slice _, slice _) inline {
+  return begin_cell().end_cell().begin_parse();
+}
+
+cell g(slice _, slice _, slice _, slice _, int _, int _, int _, int _, int _, cell _) inline {
+  return begin_cell().end_cell();
+}
+
+int h(int _, int _, int _, int _, int _) {
+  return 0;
+}

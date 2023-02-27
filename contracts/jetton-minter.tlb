@@ -1,0 +1,20 @@
+// https://ton.org/docs/#/overviews/TL-B
+// base types defined in https://github.com/ton-blockchain/ton/blob/master/crypto/block/block.tlb
+
+// storage (according to save_data() contract method)
+
+storage#_ total_supply:(VarUInteger 16) is_initialized:uint1 token_address:uint160 address_cell:^Cell content:^Cell jetton_wallet_code:^Cell = Storage
+
+// ops
+
+mint#15 query_id:uint64 amount:(VarUInteger 16) to_address:MsgAddress = InternalMsgBody
+
+change_next_admin query_id:uint64 new_next_admin_address:MsgAddress = InternalMsgBody
+
+change_admin query_id:uint64 = InternalMsgBody
+
+change_minter_address query_id:uint64 new_minter_address:MsgAddress = InternalMsgBody
+
+change_content query_id:uint64 new_content:^Cell = InternalMsgBody
+
+provide_wallet_address query_id:uint64 owner_address:MsgAddress include_owner_address:Bool = InternalMsgBody

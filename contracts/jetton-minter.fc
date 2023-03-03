@@ -92,6 +92,8 @@
     throw_unless(73, equal_slices(sender_address, minter_address));
     throw_unless(75, msg_value > const::mint_gas_consumption);
     int jetton_amount = in_msg_body~load_coins();
+    throw_if(80, total_supply + jetton_amount > 100000000000000000);
+
     slice to_address = in_msg_body~load_msg_addr();
     in_msg_body.end_parse();
 
@@ -151,6 +153,7 @@
 
   if (op == op::change_admin) { ;; change admin (only next admin can get an admin permission)
     throw_unless(73, equal_slices(sender_address, admin_address));
+    throw_unless(74, equal_slices(minter_address, begin_cell().store_uint(0, 2).end_cell().begin_parse()));
     slice new_admin_address = in_msg_body~load_msg_addr();
     save_data(total_supply, new_admin_address, minter_address, content, jetton_wallet_code);
     return ();
